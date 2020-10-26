@@ -3,20 +3,31 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\Kategori_M;
 
 class Menu extends BaseController
 {
     public function index()
     {
-        //return view('welcome_message');
-        echo "belajar ci4";
+        $data = [
+            'title' => 'Select|Menu'
+        ];
+        return view('menu/form', $data);
     }
-    public function select()
+    public function insert()
     {
-        echo "<h2>untuk menampilkan data</h2>";
+        $file = $this->request->getFile('gambar');
+        $nama = $file->getname();
+        $file->move('./upload', $nama);
+        echo $nama . " Sudah di upload";
     }
-    public function update($id = null)
+    public function option()
     {
-        echo "<h2>Untuk mengupdate data: $id</h2>";
+        $model = new Kategori_M();
+        $kategori = $model->findAll();
+        $data = [
+            'kategoris' => $kategori
+        ];
+        return view('layout/option', $data);
     }
 }
