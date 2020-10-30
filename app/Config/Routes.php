@@ -38,6 +38,8 @@ $routes->group('admin', function ($routes) {
 	$routes->add('kategori', 'Admin\kategori::read');
 	$routes->add('kategori/create', 'Admin\kategori::create');
 	$routes->add('kategori/find/(:any)', 'Admin\kategori::find/$1');
+	$routes->delete('menu/(:num)', 'Admin\menu::delete/$1');
+	$routes->delete('pelanggan/(:num)', 'Admin\pelanggan::delete/$1');
 });
 
 

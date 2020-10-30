@@ -13,15 +13,13 @@ class Kategori extends BaseController
     }
     public function read()
     {
-        $currentPage = $this->request->getVar('page_group1') ? $this->request->getVar('page_group1') : 1;
         $pager = \Config\Services::pager();
         $model = new Kategori_M();
         $data = [
             'title' => 'Aplikasi|Select',
-            'judul' => 'select data',
+            'judul' => 'Daftar Kategori',
             'kategori' => $model->paginate(3, 'group1'),
-            'pager' => $model->pager,
-            'currentPage' => $currentPage
+            'pager' => $model->pager
         ];
         return view('kategori/select', $data);
     }
@@ -29,6 +27,7 @@ class Kategori extends BaseController
     {
         $data = [
             'title' => 'Aplikasi|forminsert',
+            'judul' => "INSERT"
         ];
 
         return view('kategori/insert', $data);
@@ -51,7 +50,7 @@ class Kategori extends BaseController
         $kategori = $model->find($id);
         $data = [
             'title' => 'Aplikasi | find',
-            'judul' => 'update data',
+            'judul' => 'UPDATE',
             'kategori' => $kategori
         ];
         return view('kategori/update', $data);
@@ -59,7 +58,15 @@ class Kategori extends BaseController
     public function update()
     {
         $model = new Kategori_M();
-        $model->save($_POST);
+        $id = $_POST['idkategori'];
+        if ($model->save($_POST) === false) {
+            $error = $model->errors();
+            session()->setFlashdata('pesan', $error['kategori']);
+            return redirect()->to(base_url("/admin/kategori/find/$id"));
+        } else {
+            session()->setFlashdata('berhasil', 'data berhasil di tambahkan');
+            return redirect()->to(base_url("/admin/kategori"));
+        }
         return redirect()->to(base_url("/admin/kategori"));
     }
     public function delete($id = null)
