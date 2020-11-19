@@ -8,4 +8,5 @@ class OrderDetail_M extends Model
 {
     protected $table = 'vorderdetail';
     protected $primaryKey = 'idorderdetail';
+    protected $allowedFields = ['idorderdetail', 'idorder', 'idmenu', 'jumlah', 'hargajual'];
 }

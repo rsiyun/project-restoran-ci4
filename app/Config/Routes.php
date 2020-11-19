@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Login');
+$routes->setDefaultController('homepage');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -31,7 +31,16 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/login', 'Admin\Login::index');
+$routes->get('/login', 'Front\LoginP::index');
+
+$routes->get('cart/keranjang', 'front\cart::index');
+$routes->get('cart/keranjang/(:num)', 'front\cart::index/$1');
+$routes->get('cart/tambah/(:num)', 'front\cart::tambah/$1');
+$routes->get('history/detail/(:num)', 'front\history::detail/$1');
+$routes->get('checkout', 'front\checkout::index');
+$routes->get('cart/kurang/(:num)', 'front\cart::kurang/$1');
+$routes->get('cart/delete/(:num)', 'front\cart::delete/$1');
+$routes->get('/login/user', 'Admin\Login::index');
 $routes->group('admin', ['filter' => 'Auth'], function ($routes) {
 	$routes->add('/', 'Admin\adminpage::index');
 	$routes->add('kategori', 'Admin\kategori::read');
@@ -43,7 +52,7 @@ $routes->group('admin', ['filter' => 'Auth'], function ($routes) {
 	$routes->delete('menu/(:num)', 'Admin\menu::delete/$1');
 	$routes->add('menu/find/(:any)', 'Admin\menu::find/$1');
 	$routes->add('menu/create', 'Admin\menu::create');
-	$routes->add('delmenu/read', 'Admin\menu::read');
+	$routes->add('menu/read', 'Admin\menu::read');
 
 
 	$routes->add('order', 'Admin\order::index');

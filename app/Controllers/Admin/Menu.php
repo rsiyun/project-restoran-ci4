@@ -76,6 +76,7 @@ class Menu extends BaseController
         ];
         return view('menu/update', $data);
     }
+
     public function update()
     {
         $modelMenu = $this->modelMenu;

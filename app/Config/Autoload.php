@@ -29,12 +29,13 @@ class Autoload extends AutoloadConfig
 	 * you may change the name of the 'App' namespace if you wish,
 	 * but this should be done prior to creating any namespaced classes,
 	 * else you will need to modify all of those classes for this to work.
-	 *
+	 
 	 * Prototype:
 	 *
 	 *   $psr4 = [
 	 *       'CodeIgniter' => SYSTEMPATH,
 	 *       'App'	       => APPPATH
+	 * 
 	 *   ];
 	 *
 	 * @var array
@@ -42,8 +43,8 @@ class Autoload extends AutoloadConfig
 	public $psr4 = [
 		APP_NAMESPACE => APPPATH, // For custom app namespace
 		'Config'      => APPPATH . 'Config',
-	];
 
+	];
 	/**
 	 * -------------------------------------------------------------------
 	 * Class Map
